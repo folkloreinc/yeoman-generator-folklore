@@ -6,14 +6,18 @@ var path = require('path'),
 module.exports = Generator;
 
 function Generator() {
-  yeoman.generators.NamedBase.apply(this, arguments);
-
+    yeoman.generators.NamedBase.apply(this, arguments);
 }
 
 util.inherits(Generator, yeoman.generators.NamedBase);
 
-Generator.prototype.fetchGit = function() {
+Generator.prototype.fetchGit = function(name) {
 
-  console.log(arguments);
+    var cb = this.async();
+    this.remote('folkloreatelier', 'yeoman-boilerplate-'+name, 'master', function(err, remote) {
+        if(err) return cb(err);
+        remote.directory('.', '.');
+        cb();
+    });
 
 }
