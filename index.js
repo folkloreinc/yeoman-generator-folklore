@@ -15,11 +15,12 @@ Generator.prototype.fetchGit = function(name) {
 
     if(!name || !name.length) name = 'basic';
 
-    var cb = this.async();
+    /*var cb = this.async();
     this.remote('folkloreatelier', 'yeoman-boilerplate-'+name, 'master', function(err, remote) {
         if(err) return cb(err);
         remote.directory('.', '.');
         cb();
-    });
+    });*/
+    this.tarball('https://github.com/folkloreatelier/yeoman-boilerplate-'+name+'/tarball/master', '.', this.async());
 
 }
